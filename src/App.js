@@ -27,11 +27,6 @@ function App() {
   return (
     <div className="App">
       <Sword {...entries} />
-      <Sword
-        name={entries.name}
-        description={entries.description}
-        url={entries.url}
-      />
     </div>
   );
 }
