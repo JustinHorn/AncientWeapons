@@ -1,56 +1,24 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import Sword from "components/Sword";
-
-const spaceId = process.env.REACT_APP_SPACE_ID;
-const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
-
-const query = `
-{
-  swordCollection {
-    total
-    items {
-      name
-      image {
-        url
-      }
-      stats 
-      description
-    }
-  }
-}
-`;
+import styles from "./App.module.css";
+import DisplayStuff from "components/DisplayStuff";
+//import { NavLink, Switch, Route } from "react-router-dom";
 
 export default function App() {
-  const [entries, setEntries] = useState();
+  const [stuff, setStuff] = useState("sword");
 
-  useEffect(() => {
-    fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${spaceId}/environments/master`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({
-          query,
-        }),
-      }
-    )
-      .then((res) => res.json())
-      .then((response) => {
-        console.log(response);
+  function handleClick(e) {
+    e.preventDefault();
+  }
+  return (
+    <div className={styles.App}>
+      {stuff === "sword" && (
+        <button onClick={() => setStuff("dagger")}>Daggers</button>
+      )}
+      {stuff === "dagger" && (
+        <button onClick={() => setStuff("sword")}>Swords</button>
+      )}
 
-        const item = response.data.swordCollection.items[0];
-        const value = {
-          name: item.name,
-          description: item.description,
-          stats: item.stats,
-          url: item.image.url,
-        };
-        setEntries(value);
-      });
-  }, []);
-  return <div className="App">{entries && <Sword {...entries} />}</div>;
+      <DisplayStuff stuff={stuff} />
+    </div>
+  );
 }

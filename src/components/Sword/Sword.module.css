@@ -2,4 +2,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  border: 2px solid black;
+}
+
+.image {
+  max-width: 30vw;
+  max-height: 50vh;
+}
+
+.horizontal {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 30ch;
 }
