@@ -1,45 +1,56 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import Sword from "components/Sword";
 
-import { client } from "./Client";
+const spaceId = process.env.REACT_APP_SPACE_ID;
+const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
 
-function App() {
-  const [entries, setEntries] = useState({});
+const query = `
+{
+  swordCollection {
+    total
+    items {
+      name
+      image {
+        url
+      }
+      stats 
+      description
+    }
+  }
+}
+`;
+
+export default function App() {
+  const [entries, setEntries] = useState();
 
   useEffect(() => {
-    client
-      .getEntries()
+    fetch(
+      `https://graphql.contentful.com/content/v1/spaces/${spaceId}/environments/master`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          query,
+        }),
+      }
+    )
+      .then((res) => res.json())
       .then((response) => {
-        // items
-        // 0
-        // fields
-        // name , image {}, description: "...."
-        //image: fields:  file url
+        console.log(response);
+
+        const item = response.data.swordCollection.items[0];
         const value = {
-          name: response.items[0].fields.name,
-          description: response.items[0].fields.description,
-          url: response.items[0].fields.image.fields.file.url,
+          name: item.name,
+          description: item.description,
+          stats: item.stats,
+          url: item.image.url,
         };
         setEntries(value);
-      })
-      .catch(console.error);
+      });
   }, []);
-  return (
-    <div className="App">
-      <Sword {...entries} />
-    </div>
-  );
+  return <div className="App">{entries && <Sword {...entries} />}</div>;
 }
-
-//...
-function Sword(entries) {
-  return (
-    <>
-      <h1>{entries.name}</h1>
-      <img src={entries.url} alt="sword" />
-      <p>{entries.description}</p>
-    </>
-  );
-}
-
-export default App;
