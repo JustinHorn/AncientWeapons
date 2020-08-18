@@ -3,10 +3,13 @@ import React, { useState, useEffect } from "react";
 import Sword from "components/Sword";
 import styles from "./displaystuff.module.css";
 
+import { useParams } from "react-router-dom";
+
 const spaceId = process.env.REACT_APP_SPACE_ID;
 const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
 
-export default function DisplayStuff({ stuff }) {
+export default function DisplayStuff() {
+  const { stuff } = useParams();
   const { entries } = useStuff(stuff);
   return (
     <>
