@@ -9,11 +9,11 @@ const spaceId = process.env.REACT_APP_SPACE_ID;
 const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
 
 export default function DisplayStuff() {
-  const { stuff } = useParams();
+  const { stuff,name } = useParams();
   const { entries } = useStuff(stuff);
   return (
     <>
-      <h1>Ancient {stuff[0].toUpperCase() + stuff.slice(1) + "s"}</h1>
+      <h1>Ancient {name}</h1>
 
       <div className={styles.swords}>
         {entries && entries.map((entry) => <Sword {...entry} />)}

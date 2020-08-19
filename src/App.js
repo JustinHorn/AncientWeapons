@@ -12,23 +12,54 @@ import {
 
 export default function App() {
   const activeStyle = { backgroundColor: "salmon", color: "white" };
+
+
+  const stuff =  [
+    {
+      name: "Swords",
+      stuff: "sword"
+    },
+    {
+      name: "Daggers",
+      stuff: "dagger"
+    }, 
+     {
+      name: "Shields",
+      stuff: "shields"
+    },
+    
+     {
+      name: "Armor",
+      stuff: "armor"
+    }    , 
+    {
+     name: "Siege Weapons",
+     stuff: "siege"
+   }
+   , 
+   {
+    name: "Other",
+    stuff: "other"
+  }
+  ]
+
   return (
     <div className={styles.App}>
       <Router>
         <div className={styles.navbar}>
-          {["sword", "dagger", "shield"].map((value) => (
+          {stuff.map(({name,stuff}) => (
             <NavLink
               className={styles.navBarLink}
               activeStyle={activeStyle}
               isActive={false}
-              to={"/" + value}
+              to={"/" + stuff+"/"+name}
             >
-              {value[0].toUpperCase() + value.slice(1) + "s"}
+              {name}
             </NavLink>
           ))}
         </div>
         <Switch>
-          <Route path="/:stuff">
+          <Route path="/:stuff/:name">
             <DisplayStuff />
           </Route>
           <Route path="/">
