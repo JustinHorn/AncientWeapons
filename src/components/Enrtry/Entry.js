@@ -4,7 +4,7 @@ import styles from "./Entry.module.css";
 function Entry(entries) {
   return (
     <div className={styles.entry}>
-      <h1>{entries.name}</h1>
+      <h2>{entries.name}</h2>
       <div className={styles.horizontal}>
         <div className={styles.box}>
           <p>{entries.description}</p>

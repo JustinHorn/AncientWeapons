@@ -24,3 +24,27 @@
   background-color: salmon;
   color: white;
 }
+
+
+.videos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  max-width: 100vw;
+}
+
+@media screen and (max-width: 768px) {
+  .videos {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 10px;
+}

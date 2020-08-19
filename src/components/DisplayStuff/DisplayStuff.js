@@ -5,8 +5,10 @@ import styles from "./displaystuff.module.css";
 
 import { useParams } from "react-router-dom";
 
-const spaceId = process.env.REACT_APP_SPACE_ID;
-const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
+import fetchFromContentful, {getItemsArray} from "helper/fetchFromContentful"
+
+
+
 
 export default function DisplayStuff() {
   const { stuff, name } = useParams();
@@ -16,7 +18,7 @@ export default function DisplayStuff() {
       <h1>Ancient {name}</h1>
 
       <div className={styles.entries}>
-        {entries && entries.map((entry) => <Entry {...entry} />)}
+        {entries && entries.map((entry,index) => <Entry key={index} {...entry} />)}
       </div>
     </>
   );
@@ -29,7 +31,7 @@ function useStuff(stuff) {
     const query = getStuffQuery(stuff);
 
     fetchFromContentful(query).then((response) => {
-      const items = response.data[stuff + "Collection"].items.map((item) => {
+      const items =getItemsArray(response,stuff).map((item) => {
         return {
           name: item.name,
           description: item.description,
@@ -45,21 +47,7 @@ function useStuff(stuff) {
   return { entries, setEntries };
 }
 
-async function fetchFromContentful(query) {
-  return fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${spaceId}/environments/master`,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({
-        query,
-      }),
-    }
-  ).then((res) => res.json());
-}
+
 
 function getStuffQuery(stuff) {
   return `
@@ -77,3 +65,5 @@ function getStuffQuery(stuff) {
       }
     }`;
 }
+
+
