@@ -13,46 +13,44 @@ import {
 export default function App() {
   const activeStyle = { backgroundColor: "salmon", color: "white" };
 
-
-  const stuff =  [
+  const stuff = [
     {
       name: "Swords",
-      stuff: "sword"
+      stuff: "sword",
     },
     {
       name: "Daggers",
-      stuff: "dagger"
-    }, 
-     {
-      name: "Shields",
-      stuff: "shields"
+      stuff: "dagger",
     },
-    
-     {
-      name: "Armor",
-      stuff: "armor"
-    }    , 
     {
-     name: "Siege Weapons",
-     stuff: "siege"
-   }
-   , 
-   {
-    name: "Other",
-    stuff: "other"
-  }
-  ]
+      name: "Shields",
+      stuff: "shields",
+    },
+
+    {
+      name: "Armor",
+      stuff: "armor",
+    },
+    {
+      name: "Siege Weapons",
+      stuff: "siege",
+    },
+    {
+      name: "Other",
+      stuff: "other",
+    },
+  ];
 
   return (
     <div className={styles.App}>
       <Router>
         <div className={styles.navbar}>
-          {stuff.map(({name,stuff}) => (
+          {stuff.map(({ name, stuff }) => (
             <NavLink
               className={styles.navBarLink}
               activeStyle={activeStyle}
               isActive={false}
-              to={"/" + stuff+"/"+name}
+              to={"/" + stuff + "/" + name}
             >
               {name}
             </NavLink>
@@ -63,7 +61,7 @@ export default function App() {
             <DisplayStuff />
           </Route>
           <Route path="/">
-            <Redirect to="/sword"></Redirect>
+            <Redirect to="/sword/Swords"></Redirect>
           </Route>
         </Switch>
       </Router>

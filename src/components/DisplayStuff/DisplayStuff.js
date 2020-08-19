@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Sword from "components/Sword";
+import Entry from "components/Enrtry";
 import styles from "./displaystuff.module.css";
 
 import { useParams } from "react-router-dom";
@@ -9,14 +9,14 @@ const spaceId = process.env.REACT_APP_SPACE_ID;
 const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
 
 export default function DisplayStuff() {
-  const { stuff,name } = useParams();
+  const { stuff, name } = useParams();
   const { entries } = useStuff(stuff);
   return (
     <>
       <h1>Ancient {name}</h1>
 
-      <div className={styles.swords}>
-        {entries && entries.map((entry) => <Sword {...entry} />)}
+      <div className={styles.entries}>
+        {entries && entries.map((entry) => <Entry {...entry} />)}
       </div>
     </>
   );

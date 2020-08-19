@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./Sword.module.css";
+import styles from "./Entry.module.css";
 
-function Sword(entries) {
+function Entry(entries) {
   return (
-    <div className={styles.sword}>
+    <div className={styles.entry}>
       <h1>{entries.name}</h1>
       <div className={styles.horizontal}>
         <div className={styles.box}>
@@ -28,4 +28,4 @@ function Sword(entries) {
   );
 }
 
-export default Sword;
+export default Entry;
