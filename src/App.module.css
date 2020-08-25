@@ -7,6 +7,31 @@
   overflow: hidden;
 }
 
+button {
+  display: none;
+}
+
+@media screen and (max-width: 425px) {
+  button {
+    display: block;
+    background-color: #333;
+    text-decoration: none;
+    color: #f2f2f2;
+    text-align: center;
+    font-size: 16px;
+    padding: 15px 15px;
+  }
+
+  
+.hide {
+  display:none;
+}
+}
+
+
+
+
+
 .navBarLink {
   text-decoration: none;
   color: #f2f2f2;
@@ -32,6 +57,12 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   max-width: 100vw;
+  
+}
+
+.videos iframe {
+  width:420px;
+  height:315px;
 }
 
 @media screen and (max-width: 768px) {
@@ -39,6 +70,16 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+  .videos iframe {
+    width: 100%;
+  }
+} 
 
 
 .entry {

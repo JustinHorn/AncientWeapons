@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .swords {
+  .entries {
     grid-template-columns: 1fr;
   }
 }

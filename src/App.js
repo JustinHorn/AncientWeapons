@@ -65,15 +65,18 @@ useEffect( () => {
 },[]);
 
 
+  const [show, setShow] = useState(false)
+
 
   return (
     <div className={styles.App}>
       <Router>
         <div className={styles.navbar}>
+          <button onClick={() => setShow(!show)}>{show?"Hide":"Show"}</button>
           {stuff.map(({ name, stuff },index) => (
             <NavLink 
             key={index}
-              className={styles.navBarLink}
+              className={styles.navBarLink+ " "+ (show?"":styles.hide)}
               activeStyle={activeStyle}
               isActive={false}
               to={"/" + stuff + "/" + name}
@@ -86,7 +89,7 @@ useEffect( () => {
 
             <NavLink 
             key={-1}
-              className={styles.navBarLink}
+              className={styles.navBarLink + " "+ (show?"":styles.hide)}
               activeStyle={activeStyle}
               isActive={false}
               to={"/video"}
@@ -105,7 +108,7 @@ useEffect( () => {
           {videos.map( v =>  (
             <div className={styles.entry}>
               <h2>{v.name}</h2>
-            <iframe width="420" height="315"
+            <iframe 
             title={v.name}
             src={v.src}
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
